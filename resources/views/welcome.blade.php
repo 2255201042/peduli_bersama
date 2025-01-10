@@ -37,6 +37,14 @@
           >
             Login
           </a>
+        @if(Auth::check() && Auth::user()->id != 3)
+          <a
+            href="{{ url('/dashboard') }}"
+            class="px-4 py-2 bg-red-200 text-red-500 rounded-full shadow-md hover:bg-red-300 text-sm md:text-base"
+          >
+            Dashboard
+          </a>
+        @endif
         </div>
       </nav>
     </header>
