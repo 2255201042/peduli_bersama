@@ -1,0 +1,29 @@
+<aside class="w-64 bg-white border-r border-gray-300 shadow-md">
+        <div class="p-6">
+          <div class="flex items-center gap-4">
+            <div class="w-16 h-16 rounded-full flex items-center justify-center">
+              <img src="./Image/logo1-removebg-preview.png" alt="Logo">
+            </div>
+            <h1 class="text-red-500 font-bold text-xl">Peduli Bersama</h1>
+          </div>
+        </div>
+        <nav class="mt-6">
+          <ul class="space-y-2">
+            <li>
+              <a href="#" class="block px-6 py-3 bg-red-100 text-red-500 rounded-md font-medium">Dashboard</a>
+            </li>
+            <li>
+              <a href="#" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-md">Data Pengguna</a>
+            </li>
+            <li>
+              <a href="#" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-md">Penggalangan Dana</a>
+            </li>
+            <li>
+              <a href="#" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-md">Laporan</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="absolute bottom-4 w-full px-8">
+          <button class="wl-full py-3 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 font-medium">Log Out</button>
+        </div>
+      </aside>
