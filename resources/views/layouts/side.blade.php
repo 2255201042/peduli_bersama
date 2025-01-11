@@ -9,8 +9,8 @@
             </div>
           </a>
         </div>
-        <nav class="mt-6">
-          <ul class="space-y-2">
+        <nav class="mt-6 h-1/2">
+          <ul class="h-full">
             <li>
               <a href="{{route("admin.dashadmin")}}" class="block px-6 py-3 bg-red-100 text-red-500 rounded-md font-medium">Dashboard</a>
             </li>
@@ -23,9 +23,12 @@
             <li>
               <a href="{{route("admin.laporan")}}" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-md">Laporan</a>
             </li>
+  
           </ul>
+          <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="w-full py-3 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 font-medium">Log Out</button>
+            </form> 
         </nav>
-        <div class="absolute bottom-4 w-full px-8">
-          <button class="wl-full py-3 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 font-medium">Log Out</button>
-        </div>
+  
       </aside>
