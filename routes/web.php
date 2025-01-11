@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('public.home');
 });
+Route::get('/dashpenggalang', function () {
+    return view('dashpenggalang');
+});
+
 
 Route::get('/donasi', [KampanyeControler::class, 'donatur'])->name("donasi");
 
