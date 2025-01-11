@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::Get('/penggalang', function() {
+    Route::Get('/penggalangandana', function() {
         return view('admin.penggalangandana');
     })->name('admin.penggalangandana');
 
@@ -67,6 +67,29 @@ Route::middleware('auth')->group(function () {
         return view('admin.kampanyeselesai');
     })->name('admin.kampanyeselesai');
 
+    Route::Get('/kampanye', function() {
+        return view('admin.form_kampanye');
+    })->name('admin.form_kampanye');
+
+    Route::Get('/riwayat_donasi', function() {
+        return view('admin.riwayat_donasi');
+    })->name('admin.riwayat_donasi');
+
+    Route::Get('/pencairan_dana', function() {
+        return view('admin.pencairan_dana');
+    })->name('admin.pencairan_dana');
+
+    Route::Get('/laporankeuangan', function() {
+        return view('admin.laporankeuangan');
+    })->name('admin.laporankeuangan');
+
+    Route::Get('/laporanpengguna', function() {
+        return view('admin.laporanpengguna');
+    })->name('admin.laporanpengguna');
+
+    Route::Get('/laporanaktivitas', function() {
+        return view('admin.laporanaktivitas');
+    })->name('admin.laporanaktivitas');
 
 });
 

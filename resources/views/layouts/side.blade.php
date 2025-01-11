@@ -23,6 +23,15 @@
             <li>
               <a href="{{route("admin.laporan")}}" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-md">Laporan</a>
             </li>
+            <li>
+              <a href="{{route("admin.form_kampanye")}}" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-md">Kampanye</a>
+            </li>
+            <li>
+              <a href="{{route("admin.riwayat_donasi")}}" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-md">Riwayat Donasi</a>
+            </li>
+            <li>
+              <a href="{{route("admin.pencairan_dana")}}" class="block px-6 py-3 text-gray-700 hover:bg-gray-100 rounded-md">Pencairan Dana</a>
+            </li>
   
           </ul>
           <form method="POST" action="{{ route('logout') }}">

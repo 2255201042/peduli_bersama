@@ -5,42 +5,38 @@
 @section('content')
 <!-- Hero Section -->
 <section class="relative">
-  <img
-    src="{{ asset('images/kamp-terkini1.jpg') }}"
-    alt="Hero Image"
-    class="w-full object-cover"
-  />
+  <img class="w-full object-cover" src="{{asset('image/kamp-terkini1.jpg)') }}" alt="Hero Image">
 </section>
 
 <!-- Gallery Section -->
 <section class="container mx-auto my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
   <img
-    src="{{ asset('images/pendidikan.jpg') }}"
+    src="{{ asset('image/pendidikan.jpg') }}"
     alt="Gallery Image 1"
     class="rounded-lg shadow-md"
   />
   <img
-    src="{{ asset('images/bencana.png') }}"
+    src="{{ asset('image/bencana.png') }}"
     alt="Gallery Image 2"
     class="rounded-lg shadow-md"
   />
   <img
-    src="{{ asset('images/sosial.jpg') }}"
+    src="{{ asset('image/sosial.jpg') }}"
     alt="Gallery Image 3"
     class="rounded-lg shadow-md"
   />
   <img
-    src="{{ asset('images/bencana1.jpg') }}"
+    src="{{ asset('image/bencana1.jpg') }}"
     alt="Gallery Image 4"
     class="rounded-lg shadow-md"
   />
   <img
-    src="{{ asset('images/sosial.jpg') }}"
+    src="{{ asset('image/sosial.jpg') }}"
     alt="Gallery Image 5"
     class="rounded-lg shadow-md"
   />
   <img
-    src="{{ asset('images/sosial.png') }}"
+    src="{{ asset('image/sosial.png') }}"
     alt="Gallery Image 6"
     class="rounded-lg shadow-md"
   />

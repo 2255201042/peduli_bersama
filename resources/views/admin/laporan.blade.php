@@ -3,7 +3,7 @@
   <a  class="text-lg font-bold text-gray-800">Laporan</a>
   <div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <!-- Laporan Keuangan -->
-    <a href="#" class="block p-6 bg-white rounded-lg shadow hover:bg-gray-100">
+    <a href="{{route("admin.laporankeuangan")}}" class="block p-6 bg-white rounded-lg shadow hover:bg-gray-100">
       <div class="flex items-center gap-4">
         <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
           <span class="text-gray-400">💰</span>
@@ -16,7 +16,7 @@
     </a>
 
     <!-- Laporan Pengguna -->
-    <a href="#" class="block p-6 bg-white rounded-lg shadow hover:bg-gray-100">
+    <a href="{{route("admin.laporanpengguna")}}" class="block p-6 bg-white rounded-lg shadow hover:bg-gray-100">
       <div class="flex items-center gap-4">
         <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
           <span class="text-gray-400">👥</span>
@@ -29,7 +29,7 @@
     </a>
 
     <!-- Laporan Kampanye -->
-    <a href="#" class="block p-6 bg-white rounded-lg shadow hover:bg-gray-100">
+    <!-- <a href="#" class="block p-6 bg-white rounded-lg shadow hover:bg-gray-100">
       <div class="flex items-center gap-4">
         <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
           <span class="text-gray-400">📢</span>
@@ -39,10 +39,10 @@
           <p class="text-gray-600 text-sm">Detail penggalangan dana aktif dan selesai.</p>
         </div>
       </div>
-    </a>
+    </a> -->
 
     <!-- Laporan Aktivitas -->
-    <a href="#" class="block p-6 bg-white rounded-lg shadow hover:bg-gray-100">
+    <a href="{{route("admin.laporanaktivitas")}}" class="block p-6 bg-white rounded-lg shadow hover:bg-gray-100">
       <div class="flex items-center gap-4">
         <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
           <span class="text-gray-400">📊</span>
