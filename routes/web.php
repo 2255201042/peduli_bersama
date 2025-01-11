@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('public.home');
-});
+})->name("public.home");
 
 Route::get('/donasi', [KampanyeControler::class, 'donatur'])->name("donasi");
 
@@ -35,24 +35,32 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::Get('/penggalang', function() {
-        return view('admin.formgaldan');
-    });
+        return view('admin.penggalangandana');
+    })->name('admin.penggalangandana');
 
-    Route::Get('/penguna', function() {
+    Route::Get('/pengguna', function() {
         return view('admin.pengguna');
-    });
-    Route::Get('/dtldonatur', function() {
-        return view('admin.dtladmin');
-    });
+    })->name('admin.pengguna');
+    
+    Route::Get('/laporan', function() {
+        return view('admin.laporan');
+    })->name('admin.laporan');
+    
     Route::Get('/dashadmin', function() {
         return view('admin.dashadmin');
-    });
-    Route::Get('/dashpenggalang', function() {
-        return view('admin.dashpenggalang');
-    });
-    Route::Get('/index', function() {
-        return view('admin.index');
-    });
+    })->name('admin.dashadmin');
+
+    Route::Get('/kelolakampanyeaktif', function() {
+        return view('admin.kelolakampanyeaktif');
+    })->name('admin.kelolakampanyeaktif'); 
+
+    Route::Get('/riwayatdonasi', function() {
+        return view('admin.riwayatdonasi');
+    })->name('admin.riwayatdonasi'); 
+
+    Route::Get('/kampanyeselesai', function() {
+        return view('admin.kampanyeselesai');
+    })->name('admin.kampanyeselesai');
 
 
 });
