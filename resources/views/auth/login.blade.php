@@ -37,17 +37,10 @@
             <div class="text-sm text-red-600 mt-2">{{ $message }}</div>
           @enderror
           <div class="mt-2 text-right">
-            <a href="{{ route('password.request') }}" class="text-sm text-pink-500 hover:underline">Lupa Password?</a>
+            {{-- <a href="{{ route('password.request') }}" class="text-sm text-pink-500 hover:underline">Lupa Password?</a> --}}
           </div>
         </div>
 
-        <!-- Remember Me -->
-        <div class="flex items-center">
-          <input id="remember_me" name="remember" type="checkbox" class="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded">
-          <label for="remember_me" class="ml-2 text-sm text-gray-900">Saya menyetujui syarat dan ketentuan</label>
-        </div>
-
-        <!-- Submit Button -->
         <div>
           <button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-medium py-2 px-4 rounded shadow">
             MASUK
@@ -55,7 +48,6 @@
         </div>
       </form>
 
-      <!-- Additional Options -->
       <div class="mt-4 text-center text-sm text-gray-600">
         <p>atau</p>
         <a href="{{route('register')}}" class="text-pink-500 hover:underline">Belum Punya Akun? Buat Akun</a>

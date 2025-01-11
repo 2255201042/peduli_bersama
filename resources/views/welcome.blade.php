@@ -14,16 +14,22 @@
           <img src="https://via.placeholder.com/80" alt="Logo" class="w-16 md:w-20 h-16 md:h-20" />
           <h1 class="text-red-500 text-2xl md:text-4xl font-bold">Peduli Bersama</h1>
         </div>
-        <form class="flex bg-gray-100 p-2 rounded-lg w-full md:w-1/2 shadow-inner mt-4 md:mt-0">
-          <input
+        <form 
+        action="{{ url('/search') }}" {{-- Set the correct action route --}}
+        method="GET" {{-- Use GET for search requests --}}
+        class="flex bg-gray-100 p-2 rounded-lg w-full md:w-1/2 shadow-inner mt-4 md:mt-0"
+    >
+        <input
             type="search"
+            name="search" {{-- Add the "name" attribute to capture the search query --}}
             placeholder="Cari..."
+            value="{{ request('search') }}" {{-- Retain the search value after submitting --}}
             class="flex-grow bg-transparent outline-none px-2 text-gray-600"
-          />
-          <button type="submit" class="text-gray-600">
+        />
+        <button type="submit" class="text-gray-600">
             🔍
-          </button>
-        </form>
+        </button>
+    </form>
         <div class="flex gap-2 mt-4 md:mt-0">
           <a
             href="{{ url('/donasi') }}"
@@ -31,18 +37,21 @@
           >
             Donasi
           </a>
-          <a
-            href="{{ url('/login') }}"
-            class="px-4 py-2 bg-red-200 text-red-500 rounded-full shadow-md hover:bg-red-300 text-sm md:text-base"
-          >
-            Login
-          </a>
-        @if(Auth::check() && Auth::user()->id != 3)
+          @if(Auth::check())
+          <!-- If the user is logged in -->
           <a
             href="{{ url('/dashboard') }}"
             class="px-4 py-2 bg-red-200 text-red-500 rounded-full shadow-md hover:bg-red-300 text-sm md:text-base"
           >
             Dashboard
+          </a>
+        @else
+          <!-- If the user is not logged in -->
+          <a
+            href="{{ url('/login') }}"
+            class="px-4 py-2 bg-red-200 text-red-500 rounded-full shadow-md hover:bg-red-300 text-sm md:text-base"
+          >
+            Login
           </a>
         @endif
         </div>

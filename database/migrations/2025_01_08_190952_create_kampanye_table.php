@@ -12,15 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kampanye', function (Blueprint $table) {
+
+    
             $table->id();
-            $table->string('id_admin');
-            $table->string('id_penggalang');
+            $table->foreignId('id_admin')->constrained('users');
+            $table->foreignId('id_penggalang')->constrained('users');
             $table->string('title');
-            $table->string('deskription');
-            $table->string('target_amount');
+            $table->text('deskripsi');
+            $table->bigInteger('target_dana');
+            $table->string('gambar');
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();
+
+           
         });
         /**user */
         // Schema::create('users', function (Blueprint $table) {

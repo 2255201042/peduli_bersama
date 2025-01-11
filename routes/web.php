@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KampanyeControler;
+use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,19 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('public.home');
-})->name("public.home");
+Route::get('/',[PublicController::class, 'index'])->name("public.home");
 
 Route::get('/dashpenggalang', function () {
     return view('dashpenggalang');
 });
 
 
-Route::get('/donasi', [KampanyeControler::class, 'donatur'])->name("donasi");
+Route::get('/donasi', [PublicController::class, 'donasi'])->name("donasi");
+Route::get('/search', [PublicController::class, 'search'])->name('search');
 
-
-
+Route::get('/dtl_donatur', function () {
+    return view('public.dtladmin');
+});
 
 
 Route::get('/dashboard', function () {
