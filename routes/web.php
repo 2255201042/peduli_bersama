@@ -25,7 +25,11 @@ Route::get('/dashpenggalang', function () {
 
 Route::get('/pembayaran', function () {
     return view('public.pembayaran');
-})->name("pembayaran");
+});
+
+Route::get('/dtladmin', function () {
+    return view('public.dtladmin');
+});
 
 Route::get('/donasi', [KampanyeControler::class, 'donatur'])->name("donasi");
 

@@ -11,8 +11,10 @@
     <header class="bg-white shadow-md">
       <nav class="container mx-auto flex flex-wrap items-center justify-between py-4 px-4 md:px-8">
         <div class="flex items-center gap-4">
+        <a href="{{ route("public.home")}}">
           <img src="https://via.placeholder.com/80" alt="Logo" class="w-16 md:w-20 h-16 md:h-20" />
           <h1 class="text-red-500 text-2xl md:text-4xl font-bold">Peduli Bersama</h1>
+        </a>
         </div>
         <form class="flex bg-gray-100 p-2 rounded-lg w-full md:w-1/2 shadow-inner mt-4 md:mt-0">
           <input

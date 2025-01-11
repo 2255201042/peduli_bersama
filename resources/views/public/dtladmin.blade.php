@@ -4,10 +4,11 @@
 
 @section('content')
   <!-- Donatur Details -->
-  <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
     <!-- Left Column -->
-    <div class="bg-gray-200 rounded-lg shadow-md overflow-hidden">
-      <img src="./Image/sosial.png" alt="Placeholder Image" class="w-full h-full object-cover" />
+    <div class="bg-gray-200 rounded-lg shadow-md overflow-hidden w-full
+      h-64 lg:h-auto">
+      <img src="./Image/sosial.png" alt="Placeholder Image" class=" object-cover" style="width: 150; height: 100;" />
     </div>
 
     <!-- Right Column -->
@@ -16,9 +17,11 @@
         <h2 class="text-3xl font-bold text-red-500">Peduli Bersama</h2>
       </div>
       <div class="bg-red-100 p-4 rounded-lg shadow-md text-center lg:text-left">
+        <a href="{{ url('/pembayaran') }}" class="text-red-500 hover:underline">Lihat Detail Pembayaran
         <button class="bg-red-500 text-white px-6 py-2 rounded-full font-medium hover:bg-red-600">
           Mulai Donasi
         </button>
+        </a>
       </div>
 
       <!-- Description -->
