@@ -5,7 +5,11 @@
 @section('content')
 <!-- Hero Section -->
 <section class="relative">
-  <img class="w-full object-cover" src="{{asset('image/kamp-terkini1.jpg)') }}" alt="Hero Image">
+  <img  
+    src="{{asset('image/kamp-terkini.png)') }}" 
+    alt="Hero Image"
+    class="w-full object-cover"
+  />
 </section>
 
 <!-- Gallery Section -->

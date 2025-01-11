@@ -7,7 +7,7 @@
   <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
     <!-- Left Column -->
     <div class="bg-gray-200 rounded-lg shadow-md overflow-hidden">
-      <img src="https://via.placeholder.com/982x810" alt="Placeholder Image" class="w-full h-full object-cover" />
+      <img src="./Image/sosial.png" alt="Placeholder Image" class="w-full h-full object-cover" />
     </div>
 
     <!-- Right Column -->
