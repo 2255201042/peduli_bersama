@@ -36,6 +36,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function campaigns()
+    {
+        return $this->hasMany(Kampayes::class, 'id_penggalang');
+    }
     /**
      * The attributes that should be cast.
      *

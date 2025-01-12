@@ -12,26 +12,24 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kampanye', function (Blueprint $table) {
+
+    
             $table->id();
-            $table->string('id_admin');
+            $table->string('id_admin')->nullable();
             $table->string('id_penggalang');
             $table->string('title');
-            $table->string('deskription');
-            $table->string('target_amount');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('deskripsi');
+            $table->string('target_dana');
+            $table->string('gambar');
+            $table->string('f_ktp');
+            $table->string('lampiran');
+            $table->string('perposal')->nullable();
+            $table->string('status');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date');
             $table->timestamps();
         });
-        /**user */
-        // Schema::create('users', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->string('email')->unique();
-        //     $table->timestamp('email_verified_at')->nullable();
-        //     $table->string('password');
-        //     $table->rememberToken();
-        //     $table->timestamps();
-        // });
+
 
     }
 

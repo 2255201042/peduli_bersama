@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KampanyeControler;
+use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\DonaturController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('public.home');
-})->name("public.home");
+Route::get('/',[PublicController::class, 'index'])->name("public.home");
+Route::get('/donasi', [PublicController::class, 'donasi'])->name("donasi");
+Route::get('/search', [PublicController::class, 'search'])->name('search');
 
-Route::get('/dashpenggalang', function () {
-    return view('dashpenggalang');
+Route::get('/dtl_donatur', function () {
+    return view('public.dtladmin');
 });
 
 Route::get('/pembayaran', function () {
@@ -30,10 +33,6 @@ Route::get('/pembayaran', function () {
 Route::get('/dtladmin', function () {
     return view('public.dtladmin');
 });
-
-Route::get('/donasi', [KampanyeControler::class, 'donatur'])->name("donasi");
-
-
 
 
 
@@ -50,17 +49,13 @@ Route::middleware('auth')->group(function () {
         return view('admin.penggalangandana');
     })->name('admin.penggalangandana');
 
-    Route::Get('/pengguna', function() {
-        return view('admin.pengguna');
-    })->name('admin.pengguna');
+    Route::Get('/pengguna', [DashboardAdminController::class, 'dataPengguna'])->name('admin.pengguna');
     
     Route::Get('/laporan', function() {
         return view('admin.laporan');
     })->name('admin.laporan');
     
-    Route::Get('/dashadmin', function() {
-        return view('admin.dashadmin');
-    })->name('admin.dashadmin');
+    Route::Get('/dashadmin', [DashboardAdminController::class, 'dashboardAdmin'])->name('admin.dashadmin');
 
     Route::Get('/kelolakampanyeaktif', function() {
         return view('admin.kelolakampanyeaktif');
@@ -79,7 +74,7 @@ Route::middleware('auth')->group(function () {
     })->name('admin.form_kampanye');
 
     Route::Get('/riwayat_donasi', function() {
-        return view('admin.riwayat_donasi');
+        return view('admin.donatur.riwayatdonasi');
     })->name('admin.riwayat_donasi');
 
     Route::Get('/pencairan_dana', function() {
@@ -97,6 +92,34 @@ Route::middleware('auth')->group(function () {
     Route::Get('/laporanaktivitas', function() {
         return view('admin.laporanaktivitas');
     })->name('admin.laporanaktivitas');
+
+
+    // Kampanye
+    Route::Get('/dashboard/kampanye', [KampanyeControler::class, 'index'])->name('admin.kampanye');
+    Route::Get('/kampanye', [KampanyeControler::class, 'list'])->name('kampanye.list');
+    Route::Get('/kampanye/create', [KampanyeControler::class, 'create'])->name('kampanye.create');
+    Route::Get('/kampanye/{id}', [KampanyeControler::class, 'show'])->name('kampanye.show');
+    Route::Post('/kampanye/store', [KampanyeControler::class, 'store'])->name('kampanye.store');
+    Route::get('/pencairan/create', [KampanyeControler::class, 'createPencairanDana'])->name('pencairan.create');
+    Route::post('/pencairan/store', [KampanyeControler::class, 'storePencairanDana'])->name('pencairan.store');
+
+
+    // Donatur
+    Route::Get('/donatur', [DonaturController::class, 'index'])->name('admin.donatur');
+    
+
+    // Admin
+    Route::Get('dashboard/admin', [DashboardAdminController::class, 'dashboardAdmin'])->name('admin.dashboard');
+    Route::Get('detailkampanye/{id}', [DashboardAdminController::class, 'detailkampanye'])->name('admin.detailkampanye');
+    Route::Get('admin/pengalang', [DashboardAdminController::class, 'pengalang'])->name('admin.pengalang');
+    Route::Get('admin/pengguna', [DashboardAdminController::class, 'penguna'])->name('admin.pengguna');
+    Route::Get('admin/kelola', [DashboardAdminController::class, 'kelolaFull'])->name('admin.kelola');
+    Route::put('admin/valid/{id}', [DashboardAdminController::class, 'approveCampaign'])->name('admin.valid');
+    // Route::Get('kampanye/edit/{id}', [KampanyeControler::class, 'edit'])->name('kampanye.edit');
+    // Route::Patch('kampanye/update/{id}', [KampanyeControler::class, 'update'])->name('kampanye.update');
+    // Route::Delete('kampanye/delete/{id}', [KampanyeControler::class, 'destroy'])->name('kampanye.delete');
+
+    
 
 });
 
