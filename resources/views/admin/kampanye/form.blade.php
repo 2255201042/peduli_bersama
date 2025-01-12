@@ -6,6 +6,18 @@
         <p class="text-sm text-gray-600">Isi formulir untuk memulai kampanye penggalangan dana</p>
       </div>
 
+      <!-- Template Download Section -->
+      <div class="mb-6 text-center">
+        <p class="text-sm text-gray-600">Unduh template laporan penggunaan dana:</p>
+        <a 
+          href="{{ asset('template/Laporan_Penggunaan_Dana.docx') }}" 
+          class="inline-block px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded shadow"
+          download
+        >
+          Download Template
+        </a>
+      </div>
+
       <!-- Form -->
       <form action="{{ route('kampanye.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -75,7 +87,7 @@
           </div>
 
           <!-- Status (Hidden Field) -->
-          <input type="hidden" name="status" value="pending">
+          <input type="hidden" name="status" value="3">
 
         </div>
 

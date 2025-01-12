@@ -22,17 +22,30 @@ Route::get('/',[PublicController::class, 'index'])->name("public.home");
 Route::get('/donasi', [PublicController::class, 'donasi'])->name("donasi");
 Route::get('/search', [PublicController::class, 'search'])->name('search');
 
-Route::get('/dtl_donatur', function () {
-    return view('public.dtladmin');
-});
+Route::get('/dtl_donatur/{id}', [PublicController::class, 'detail'])->name('dtl_donatur');
 
 Route::get('/pembayaran', function () {
     return view('public.pembayaran');
 });
 
+Route::get('/success-transaction/{id}', [PublicController::class, 'successTransaction'])->name('success.transaction');
+// Route::get('/mawdono/{id}', [PublicController::class, 'generateQRCode'])->name('bayar_donasi');
+
+// Route::post('/bayardonasi', [PublicController::class, 'donasiStore'])->name('bayar_donasi.post');
+
 Route::get('/dtladmin', function () {
     return view('public.dtladmin');
 });
+
+
+// Route to display the donation form
+Route::get('/donasi/{id}', [PublicController::class, 'showDonationForm'])->name('donasi.form');
+
+// Route to handle donation form submission
+Route::post('/donasi', [PublicController::class, 'donasiStore'])->name('bayar_donasi.post');
+
+// Route to generate and display the QR code for validation
+Route::get('/donasi/qrcode/{id}', [PublicController::class, 'generateQRCode'])->name('generate.qr');
 
 
 
@@ -115,11 +128,8 @@ Route::middleware('auth')->group(function () {
     Route::Get('admin/pengguna', [DashboardAdminController::class, 'penguna'])->name('admin.pengguna');
     Route::Get('admin/kelola', [DashboardAdminController::class, 'kelolaFull'])->name('admin.kelola');
     Route::put('admin/valid/{id}', [DashboardAdminController::class, 'approveCampaign'])->name('admin.valid');
-    // Route::Get('kampanye/edit/{id}', [KampanyeControler::class, 'edit'])->name('kampanye.edit');
-    // Route::Patch('kampanye/update/{id}', [KampanyeControler::class, 'update'])->name('kampanye.update');
-    // Route::Delete('kampanye/delete/{id}', [KampanyeControler::class, 'destroy'])->name('kampanye.delete');
 
-    
+
 
 });
 

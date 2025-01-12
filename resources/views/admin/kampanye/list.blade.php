@@ -32,7 +32,36 @@
               <td class="py-3 px-4">{{ $kampanye->title }}</td>
               <td class="py-3 px-4">{{ Str::limit($kampanye->deskripsi, 50) }}</td>
               <td class="py-3 px-4">Rp {{ number_format($kampanye->target_dana, 0, ',', '.') }}</td>
-              <td class="py-3 px-4 capitalize">{{ $kampanye->status }}</td>
+              <td class="py-3 px-4 capitalize">
+                @switch($kampanye->status)
+                  @case(1)
+                    Galang
+                    @break
+                  @case(2)
+                    Aktif
+                    @break
+                  @case(3)
+                    Pending
+                    @break
+                  @case(4)
+                    Sedang di Proses WD
+                    @break
+                  @case(5)
+                    Selesai
+                    @break
+                  @case(6)
+                    WD Gagal
+                    @break
+                  @case(7)
+                    Gagal Galang
+                    @break
+                  @case(8)
+                    Dibatalkan
+                    @break
+                  @default
+                    Tidak Diketahui
+                @endswitch
+              </td>
               <td class="py-3 px-4 flex space-x-2">
                 <a href="{{ route('kampanye.show', $kampanye->id) }}" class="text-blue-500 hover:underline">Lihat</a>                
               </td>

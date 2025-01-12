@@ -9,7 +9,7 @@
     <div class="relative group rounded-lg shadow-md bg-gray-200 overflow-hidden h-64">
       <!-- Image -->
       <img
-        src="{{ asset($item->gambar ?? 'image/placeholder.jpg') }}" {{-- Fallback to placeholder --}}
+        src="{{ asset('images/campaigns/'.$item->gambar ?? 'image/placeholder.jpg') }}" {{-- Fallback to placeholder --}}
         alt="{{ $item->title }}"
         class="absolute inset-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
       />

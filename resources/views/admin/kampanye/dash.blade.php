@@ -44,7 +44,19 @@
                         <td class="py-2 px-4">{{ $campaign->title }}</td>
                         <td class="py-2 px-4">{{ $campaign->penggalang->name ?? 'N/A' }}</td>
                         <td class="py-2 px-4">Rp. {{ number_format($campaign->target_dana) }}</td>
-                        <td class="py-2 px-4">{{ $campaign->status == "1" ? 'Active' : 'Inactive' }}</td>
+                        <td class="py-2 px-4">
+                            {{ match($campaign->status) {
+                                1 => 'Done Galang',
+                                2 => 'Aktif',
+                                3 => 'Pending',
+                                4 => 'Sedang di Proses WD',
+                                5 => 'Selesai',
+                                6 => 'WD Gagal',
+                                7 => 'Gagal Galang',
+                                8 => 'Dibatalkan',
+                                default => $campaign->status,
+                            } }}
+                        </td>
                         <td class="py-2 px-4">
                             <a href="{{ route('kampanye.show', $campaign->id) }}" class="text-blue-500 hover:underline">Lihat</a>                
 
@@ -65,7 +77,6 @@
                         <th class="py-2 px-4">Phone</th>
                         <th class="py-2 px-4">Amount</th>
                         <th class="py-2 px-4">Date</th>
-                        <th class="py-2 px-4">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,10 +86,6 @@
                         <td class="py-2 px-4">{{ $donation->no_hp }}</td>
                         <td class="py-2 px-4">Rp. {{ number_format($donation->payment_amount) }}</td>
                         <td class="py-2 px-4">{{ $donation->payment_date }}</td>
-                        <td class="py-2 px-4">
-                            <button class="text-blue-500 hover:underline">View</button> |
-                            <button class="text-red-500 hover:underline">Delete</button>
-                        </td>
                     </tr>
                     @endforeach
                 </tbody>
