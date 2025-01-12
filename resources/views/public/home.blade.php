@@ -9,10 +9,10 @@
 
   <div class="swiper">
     <div class="swiper-wrapper">
-      @foreach($Gambars as $image)
+      @foreach($Kdata as $image)
         <div class="swiper-slide">
           <img 
-            src="{{ asset($image->image_path) }}" 
+            src="{{ asset("images/campaigns/" . $image->gambar) }}" 
             alt="Slide Image {{ $loop->iteration }}" 
             class="w-full object-cover"
           />
@@ -32,7 +32,7 @@
     <div class="relative rounded-lg shadow-md overflow-hidden bg-white group">
       <!-- Image -->
       <img 
-        src="{{ asset('kampanye/') }}" 
+        src="{{ asset('images/campaigns/' . $campaign->gambar) }}" 
         alt="{{ $campaign->title }}" 
         class="w-full h-48 object-cover"
       />

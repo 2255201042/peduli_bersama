@@ -13,33 +13,17 @@ class PublicController extends Controller
      */
     public function index()
     {
-        // Fetch images and campaigns
-        $Gambars = Gambars::all();
+        // Fetch campaigns with images
         $Kdata = Kampayes::all();
-        
-        // Provide placeholder images if no images are available or less than 6
-        $defaultImages = [
-            (object)['image_path' => 'image/placeholder.jpg'],
-            (object)['image_path' => 'image/placeholder.jpg'],
-            (object)['image_path' => 'image/placeholder.jpg'],
-            (object)['image_path' => 'image/placeholder.jpg'],
-            (object)['image_path' => 'image/placeholder.jpg'],
-            (object)['image_path' => 'image/placeholder.jpg'],
-        ];
     
-        if ($Gambars->count() < 6) {
-            // Add placeholder images to make up the difference
-            $remainingImages = 6 - $Gambars->count();
-            $Gambars = $Gambars->concat(array_slice($defaultImages, 0, $remainingImages));
-        }
-    
-        // Ensure Kdata has exactly 6 campaigns
+        // Ensure Kdata has exactly 6 campaigns with placeholder data if necessary
         $dummyCampaigns = [
             (object)[
                 'id' => 1,
                 'title' => 'Dummy Campaign 1',
                 'deskripsi' => 'This is a dummy description for campaign 1.',
                 'target_dana' => 1000000,
+                'gambar' => 'placeholder.jpg',
                 'end_date' => now()->addDays(10),
             ],
             (object)[
@@ -47,6 +31,7 @@ class PublicController extends Controller
                 'title' => 'Dummy Campaign 2',
                 'deskripsi' => 'This is a dummy description for campaign 2.',
                 'target_dana' => 2000000,
+                'gambar' => 'placeholder.jpg',
                 'end_date' => now()->addDays(15),
             ],
             (object)[
@@ -54,6 +39,7 @@ class PublicController extends Controller
                 'title' => 'Dummy Campaign 3',
                 'deskripsi' => 'This is a dummy description for campaign 3.',
                 'target_dana' => 3000000,
+                'gambar' => 'placeholder.jpg',
                 'end_date' => now()->addDays(20),
             ],
             (object)[
@@ -61,6 +47,7 @@ class PublicController extends Controller
                 'title' => 'Dummy Campaign 4',
                 'deskripsi' => 'This is a dummy description for campaign 4.',
                 'target_dana' => 4000000,
+                'gambar' => 'placeholder.jpg',
                 'end_date' => now()->addDays(25),
             ],
             (object)[
@@ -68,6 +55,7 @@ class PublicController extends Controller
                 'title' => 'Dummy Campaign 5',
                 'deskripsi' => 'This is a dummy description for campaign 5.',
                 'target_dana' => 5000000,
+                'gambar' => 'placeholder.jpg',
                 'end_date' => now()->addDays(30),
             ],
             (object)[
@@ -75,6 +63,7 @@ class PublicController extends Controller
                 'title' => 'Dummy Campaign 6',
                 'deskripsi' => 'This is a dummy description for campaign 6.',
                 'target_dana' => 6000000,
+                'gambar' => 'placeholder.jpg',
                 'end_date' => now()->addDays(35),
             ],
         ];
@@ -85,9 +74,17 @@ class PublicController extends Controller
             $Kdata = $Kdata->concat(array_slice($dummyCampaigns, 0, $remainingCampaigns));
         }
     
-        return view('public.home', compact('Gambars', 'Kdata'));
+        // Map images to ensure valid paths
+        $Kdata = $Kdata->map(function ($kampanye) {
+            // If no image is set, use a placeholder
+            $kampanye->image_path = $kampanye->gambar 
+                ? asset('images/campaigns/' . $kampanye->gambar) 
+                : asset('images/placeholder.jpg');
+            return $kampanye;
+        });
+    
+        return view('public.home', compact('Kdata'));
     }
-
 
     public function donasi()
     {
