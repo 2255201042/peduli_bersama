@@ -80,11 +80,6 @@ class DashboardAdminController extends Controller
         $kampanyeWdGagal = Kampayes::where('status', 6)->limit(5)->get();
         $kampanyeGagalGalang = Kampayes::where('status', 7)->limit(5)->get();
 
-        // Riwayat donasi limited to 5 rows
-        $riwayatDonasi = Validasi_Danas::with('kampanye', 'donatur')
-            ->orderBy('created_at', 'desc')
-            ->limit(5)
-            ->get();
 
         // Pass the data to the view
         return view('admin.admin.penggalang', compact(
@@ -95,7 +90,6 @@ class DashboardAdminController extends Controller
             'kampanyeWdBerhasil',
             'kampanyeWdGagal',
             'kampanyeGagalGalang',
-            'riwayatDonasi'
         ));
     }
 

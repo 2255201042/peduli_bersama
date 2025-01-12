@@ -46,8 +46,13 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        
+        if ($user->role_id == 3) {
+            return redirect()->route('admin.dashboard');
+        } else if ($user->role_id == 2) {
+            return redirect()->route('admin.donatur');
+        } else {
+            return redirect()->route('admin.kampanye');
+        }
     }
 }
