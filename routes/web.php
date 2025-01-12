@@ -26,6 +26,13 @@ Route::get('/dtl_donatur', function () {
     return view('public.dtladmin');
 });
 
+Route::get('/pembayaran', function () {
+    return view('public.pembayaran');
+});
+
+Route::get('/dtladmin', function () {
+    return view('public.dtladmin');
+});
 
 
 

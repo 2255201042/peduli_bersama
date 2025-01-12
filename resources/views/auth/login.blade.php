@@ -36,9 +36,10 @@
           @error('password')
             <div class="text-sm text-red-600 mt-2">{{ $message }}</div>
           @enderror
-          <div class="mt-2 text-right">
-            {{-- <a href="{{ route('password.request') }}" class="text-sm text-pink-500 hover:underline">Lupa Password?</a> --}}
-          </div>
+          <!-- <div class="mt-2 text-right">
+            <a href="{{ route('password.request') }}" class="text-sm text-pink-500 hover:underline">Lupa Password?</a>
+          </div> -->
+
         </div>
 
         <div>

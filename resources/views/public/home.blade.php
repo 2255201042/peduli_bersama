@@ -6,6 +6,7 @@
 
 
 <section class="relative">
+
   <div class="swiper">
     <div class="swiper-wrapper">
       @foreach($Gambars as $image)
@@ -23,6 +24,7 @@
     <div class="swiper-button-prev"></div>
     <div class="swiper-button-next"></div>
   </div>
+
 </section>
 
 <section class="container mx-auto my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

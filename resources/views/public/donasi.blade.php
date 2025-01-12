@@ -5,6 +5,7 @@
 @section('content')
 <section class="container mx-auto my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6">
   @foreach ($galleryItems as $item)
+
     <div class="relative group rounded-lg shadow-md bg-gray-200 overflow-hidden h-64">
       <!-- Image -->
       <img
