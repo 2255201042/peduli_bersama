@@ -17,4 +17,10 @@ class Validasi_Danas extends Model
         'payment_amount',
         'payment_date',
     ];
+
+    protected $table = 'validasidana';
+    public function campaign()
+    {
+        return $this->belongsTo(Kampayes::class, 'kampanye_id');
+    }
 }

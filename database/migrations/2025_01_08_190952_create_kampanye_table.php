@@ -15,28 +15,21 @@ return new class extends Migration
 
     
             $table->id();
-            $table->foreignId('id_admin')->constrained('users');
-            $table->foreignId('id_penggalang')->constrained('users');
+            $table->string('id_admin')->nullable();
+            $table->string('id_penggalang');
             $table->string('title');
-            $table->text('deskripsi');
-            $table->bigInteger('target_dana');
+            $table->string('deskripsi');
+            $table->string('target_dana');
             $table->string('gambar');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('f_ktp');
+            $table->string('lampiran');
+            $table->string('perposal')->nullable();
+            $table->string('status');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date');
             $table->timestamps();
-
-           
         });
-        /**user */
-        // Schema::create('users', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('name');
-        //     $table->string('email')->unique();
-        //     $table->timestamp('email_verified_at')->nullable();
-        //     $table->string('password');
-        //     $table->rememberToken();
-        //     $table->timestamps();
-        // });
+
 
     }
 
