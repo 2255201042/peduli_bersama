@@ -91,7 +91,7 @@
             <div class="alert alert-info text-center">Belum ada donasi pada kampanye ini.</div>
         @else
             <div class="table-responsive">
-                <table class="table table-borderless table-hover shadow-sm">
+                <table class="table table-hover shadow-sm">
                     <thead class="bg-primary text-white">
                         <tr class="text-center">
                             <th>#</th>
@@ -103,28 +103,17 @@
                     </thead>
                     <tbody>
                         @foreach ($dananya as $donation)
-                        <tr class="text-center">
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $donation->donor_name ?? 'Anonymous' }}</td>
-                            <td>Rp{{ number_format($donation->amount, 0, ',', '.') }}</td>
-                            <td>{{ $donation->created_at->format('d M Y') }}</td>
-                            <td>
-                                @switch($donation->status)
-                                    @case(1) <span class="badge bg-warning">Pending</span> @break
-                                    @case(2) <span class="badge bg-success">Validated</span> @break
-                                    @case(3) <span class="badge bg-danger">Failed</span> @break
-                                    @default <span class="badge bg-secondary">Unknown</span>
-                                @endswitch
-                            </td>
+                        <tr>
+                            <td class="py-2 px-4">{{ $donation->name }}</td>
+                            <td class="py-2 px-4">{{ $donation->no_hp }}</td>
+                            <td class="py-2 px-4">Rp. {{ number_format($donation->payment_amount) }}</td>
+                            <td class="py-2 px-4">{{ $donation->payment_date }}</td>
+        
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
         @endif
-
-        <div class="text-center mt-4">
-            <a href="{{ route('admin.kelola') }}" class="btn btn-secondary btn-lg">Kembali</a>
-        </div>
     </div>
 </x-app-layout>

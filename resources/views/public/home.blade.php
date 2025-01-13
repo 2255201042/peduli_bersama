@@ -6,25 +6,25 @@
 
 
 <section class="relative">
-
+  <!-- Swiper -->
   <div class="swiper">
-    <div class="swiper-wrapper">
-      @foreach($Gambars as $image)
-        <div class="swiper-slide">
-          <img 
-            src="{{ asset($image->image_path) }}" 
-            alt="Slide Image {{ $loop->iteration }}" 
-            class="w-full object-cover"
-          />
-        </div>
-      @endforeach
-    </div>
-
-    <div class="swiper-pagination"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+      <div class="swiper-wrapper">
+          @foreach($Kdata as $image)
+              <div class="swiper-slide">
+                  <img 
+                      src="{{ asset('images/campaigns/' . $image->gambar) }}" 
+                      alt="Slide Image {{ $loop->iteration }}" 
+                      class="w-full h-96 object-cover"
+                  />
+              </div>
+          @endforeach
+      </div>
+      <!-- Pagination -->
+      <div class="swiper-pagination"></div>
+      <!-- Navigation Buttons -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
   </div>
-
 </section>
 
 <section class="container mx-auto my-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -32,7 +32,7 @@
     <div class="relative rounded-lg shadow-md overflow-hidden bg-white group">
       <!-- Image -->
       <img 
-        src="{{ asset('kampanye/') }}" 
+        src="{{ asset('images/campaigns/' . $campaign->gambar) }}" 
         alt="{{ $campaign->title }}" 
         class="w-full h-48 object-cover"
       />
@@ -46,7 +46,7 @@
         </p>
         <p class="text-sm text-gray-300 mb-4">Berakhir: {{ \Carbon\Carbon::parse($campaign->end_date)->format('d M Y') }}</p>
         <a 
-          href="{{ url('/campaign/' . $campaign->id) }}" 
+          href="{{ url('/dtl_donatur/' . $campaign->id) }}" 
           class="inline-block px-6 py-2 bg-red-500 text-white rounded-full shadow-md text-sm font-semibold hover:bg-red-600"
         >
           Lihat Detail
@@ -92,4 +92,26 @@
     </a>
   </div>
 </section>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      new Swiper(".swiper", {
+          // Swiper configuration
+          loop: true,
+          pagination: {
+              el: ".swiper-pagination",
+              clickable: true,
+          },
+          navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+          },
+          autoplay: {
+              delay: 3000, // Slide change delay in milliseconds
+              disableOnInteraction: false,
+          },
+      });
+  });
+</script>
 @endsection

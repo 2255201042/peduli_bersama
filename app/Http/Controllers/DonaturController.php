@@ -15,11 +15,12 @@ class DonaturController extends Controller
         $totalUang = Validasi_Danas::where('id_donatur', Auth::id())->sum('payment_amount');
 
         $riwayatDonasi = Validasi_Danas::where('id_donatur', Auth::id())
-            ->with('kampanye') // Load related campaign information
-            ->orderBy('created_at', 'desc') // Sort by most recent donations
-            ->get();
+            ->join('kampanye', 'validasidana.kampanye_id', '=', 'kampanye.id')
+            ->orderBy('payment_date', 'desc')
+            ->get(['validasidana.*', 'kampanye.*']);
 
-        // Pass data to the view
+
+            // Pass data to the view
         return view('admin.donatur.riwayatdonasi', compact('riwayatDonasi', 'totalDonasi', 'totalUang'));
     }
 }

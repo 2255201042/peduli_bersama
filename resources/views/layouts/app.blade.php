@@ -32,7 +32,7 @@
                     <header class="flex items-center justify-between">
                         <h2 class="text-xl font-bold text-gray-800">Admin Dashboard</h2>
                         <div class="flex items-center gap-4">
-                            <span class="text-sm text-gray-500">admin@pedulibersama.com</span>
+                            <span class="text-sm text-gray-500">{{ Auth::user()->email }}</span>
                             <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
                                 <span class="text-gray-400">👤</span>
                             </div>
@@ -40,8 +40,12 @@
                     </header>
                 @endif
 
-                {{ $slot }}
+                <section class="overflow-auto h-full">
+                    {{ $slot }}
+                </section>
             </main>
+           
+
         </div>
     </body>
 </html>

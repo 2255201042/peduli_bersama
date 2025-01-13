@@ -31,9 +31,9 @@
           @forelse ($riwayatDonasi as $donasi)
             <tr>
               <td class="py-2 px-4 border-b border-gray-300">{{ Auth::user()->name }}</td>
-              <td class="py-2 px-4 border-b border-gray-300">Rp {{ number_format($donasi->jumlah_donasi, 0, ',', '.') }}</td>
+              <td class="py-2 px-4 border-b border-gray-300">Rp {{ number_format($donasi->payment_amount, 0, ',', '.') }}</td>
               <td class="py-2 px-4 border-b border-gray-300">{{ \Carbon\Carbon::parse($donasi->tanggal_donasi)->format('d-m-Y') }}</td>
-              <td class="py-2 px-4 border-b border-gray-300">{{ $donasi->kampanye->title ?? 'N/A' }}</td>
+              <td class="py-2 px-4 border-b border-gray-300">{{ $donasi->title ?? 'N/A' }}</td>
             </tr>
           @empty
             <tr>

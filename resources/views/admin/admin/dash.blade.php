@@ -44,11 +44,38 @@
                       <td class="py-2 px-4">{{ $campaign->title }}</td>
                       <td class="py-2 px-4">{{ $campaign->penggalang->name ?? 'N/A' }}</td>
                       <td class="py-2 px-4">Rp. {{ number_format($campaign->target_dana) }}</td>
-                      <td class="py-2 px-4">{{ $campaign->status ? 'Active' : 'Inactive' }}</td>
                       <td class="py-2 px-4">
-                          <button class="text-blue-500 hover:underline">View</button> |
-                          <button class="text-green-500 hover:underline">Approve</button> |
-                          <button class="text-red-500 hover:underline">Delete</button>
+                          @switch($campaign->status)
+                              @case(1)
+                                  Done Galang
+                                  @break
+                              @case(2)
+                                  Aktif
+                                  @break
+                              @case(3)
+                                  Pending
+                                  @break
+                              @case(4)
+                                  Sedang di Proses WD
+                                  @break
+                              @case(5)
+                                  Selesai
+                                  @break
+                              @case(6)
+                                  WD Gagal
+                                  @break
+                              @case(7)
+                                  Gagal Galang
+                                  @break
+                              @case(8)
+                                  Dibatalkan
+                                  @break
+                              @default
+                                  Unknown
+                          @endswitch
+                      </td>
+                      <td class="py-2 px-4">
+                        <a href="{{ route('admin.detailkampanye', $campaign->id) }}" class="btn btn-info btn-sm px-3 rounded-pill">View</a>
                       </td>
                   </tr>
                   @endforeach
@@ -66,7 +93,6 @@
                       <th class="py-2 px-4">Phone</th>
                       <th class="py-2 px-4">Amount</th>
                       <th class="py-2 px-4">Date</th>
-                      <th class="py-2 px-4">Actions</th>
                   </tr>
               </thead>
               <tbody>
@@ -76,10 +102,7 @@
                       <td class="py-2 px-4">{{ $donation->no_hp }}</td>
                       <td class="py-2 px-4">Rp. {{ number_format($donation->payment_amount) }}</td>
                       <td class="py-2 px-4">{{ $donation->payment_date }}</td>
-                      <td class="py-2 px-4">
-                          <button class="text-blue-500 hover:underline">View</button> |
-                          <button class="text-red-500 hover:underline">Delete</button>
-                      </td>
+  
                   </tr>
                   @endforeach
               </tbody>
