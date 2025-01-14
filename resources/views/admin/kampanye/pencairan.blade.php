@@ -59,32 +59,69 @@
       <h2 class="text-xl font-bold text-gray-800 mb-4">Status Pencairan Dana</h2>
       <table class="w-full border border-gray-300 text-left rounded-lg overflow-hidden">
         <thead class="bg-gray-200">
-          <tr>
-            <th class="py-2 px-4">No</th>
-            <th class="py-2 px-4">Kampanye</th>
-            <th class="py-2 px-4">Tanggal Pengajuan</th>
-            <th class="py-2 px-4">Proposal</th>
-            <th class="py-2 px-4">Status</th>
-          </tr>
+            <tr>
+                <th class="py-2 px-4">No</th>
+                <th class="py-2 px-4">Kampanye</th>
+                <th class="py-2 px-4">Jumlah Pengajuan</th>
+                <th class="py-2 px-4">Proposal</th>
+                <th class="py-2 px-4">Status</th>
+                <th class="py-2 px-4">Alasan</th>
+            </tr>
         </thead>
         <tbody>
-          @forelse ($withdrawals as $key => $withdrawal)
-          <tr class="border-t">
-            <td class="py-2 px-4">{{ $key + 1 }}</td>
-            <td class="py-2 px-4">{{ $withdrawal->kampanye->title }}</td>
-            <td class="py-2 px-4">{{ $withdrawal->created_at->format('d M Y') }}</td>
-            <td class="py-2 px-4">
-              <a href="{{ asset('attachments/' . $withdrawal->proposal) }}" target="_blank" class="text-blue-500 hover:underline">Lihat Proposal</a>
-            </td>
-            <td class="py-2 px-4 capitalize">{{ $withdrawal->status }}</td>
-          </tr>
-          @empty
-          <tr>
-            <td colspan="5" class="py-2 px-4 text-center text-gray-600">Belum ada pencairan dana.</td>
-          </tr>
-          @endforelse
+            @forelse ($withdrawals as $key => $withdrawal)
+            <tr class="border-t">
+                <td class="py-2 px-4">{{ $key + 1 }}</td>
+                <td class="py-2 px-4">{{ $withdrawal->title }}</td>
+                <td class="py-2 px-4">{{ number_format($withdrawal->total_amount, 2) }}</td>
+                <td class="py-2 px-4">
+                    <a href="{{ asset('attachments/' . $withdrawal->proposal) }}" target="_blank" class="text-blue-500 hover:underline">Lihat Proposal</a>
+                </td>
+                <td class="py-2 px-4 capitalize">
+                    @switch($withdrawal->status)
+                        @case(1)
+                            Done Galang
+                            @break
+                        @case(2)
+                            Aktif
+                            @break
+                        @case(3)
+                            Pending
+                            @break
+                        @case(4)
+                            Sedang di Proses Pencairan
+                            @break
+                        @case(5)
+                            Selesai
+                            @break
+                        @case(6)
+                            WD Gagal
+                            @break
+                        @case(7)
+                            Gagal Galang
+                            @break
+                        @case(8)
+                            Dibatalkan
+                            @break
+                        @default
+                            Unknown
+                    @endswitch
+                </td>
+                <td class="py-2 px-4">
+                    @if ($withdrawal->status == 6 && $withdrawal->alesan)
+                        {{ $withdrawal->alesan }}
+                    @else
+                        -
+                    @endif
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="6" class="py-2 px-4 text-center text-gray-600">Belum ada pencairan dana.</td>
+            </tr>
+            @endforelse
         </tbody>
-      </table>
+    </table>
     </div>
   </section>
 </x-app-layout>

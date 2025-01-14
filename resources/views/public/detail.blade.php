@@ -6,11 +6,11 @@
 <!-- Donatur Details -->
 <section class="grid grid-cols-1 lg:grid-cols-2 gap-4">
     <!-- Left Column -->
-    <div class="bg-gray-200 rounded-lg shadow-md overflow-hidden">
+    <div class="bg-gray-200 rounded-lg h-2/5 shadow-md overflow-hidden">
         <img 
             src="{{ asset('images/campaigns/' . $Kdata->gambar) }}" 
             alt="{{ $Kdata->title }}" 
-            class="w-full h-full object-cover"
+            class="w-full  object-fit"
         />
     </div>
 
@@ -19,12 +19,31 @@
         <div class="text-center lg:text-left">
             <h2 class="text-3xl font-bold text-red-500">{{ $Kdata->title }}</h2>
         </div>
-        <div class="bg-red-100 p-4 rounded-lg shadow-md text-center lg:text-left">
-            <a href="{{ route('donasi.form', $Kdata->id) }}" class="text-red-500 hover:underline">
-                Lihat Detail Pembayaran
-            </a>
+        <div class="bg-white p-6 rounded-lg shadow-lg">
+            <h1 class="text-2xl font-bold mb-4">{{ $Kdata->title }}</h1>
+            <p class="text-gray-700">{{ $Kdata->deskripsi }}</p>
+        
+            <!-- Progress Bar -->
+            <div class="mt-6">
+                <p class="font-semibold text-gray-600">Total Collected: {{ number_format($totalCollected, 2) }} / {{ number_format($Kdata->target_dana, 2) }}</p>
+                <div class="w-full bg-gray-200 rounded-full h-4 overflow-hidden mt-2">
+                    <div class="bg-green-500 h-full" style="width: {{ min(($totalCollected / $Kdata->target_dana) * 100, 100) }}%;"></div>
+                </div>
+            </div>
+        
+            <!-- Campaign Dates -->
+            <div class="mt-4">
+                <p class="text-sm text-gray-500">Start Date: {{ \Carbon\Carbon::parse($startDate)->format('d M Y') }}</p>
+                <p class="text-sm text-gray-500">End Date: {{ \Carbon\Carbon::parse($endDate)->format('d M Y') }}</p>
+            </div>
+        
+            <!-- Link to Payment Details -->
+            <div class="mt-6 text-center lg:text-left">
+                <a href="{{ route('donasi.form', $Kdata->id) }}" class="text-red-500 hover:underline">
+                    Lihat Detail Pembayaran
+                </a>
+            </div>
         </div>
-
         <!-- Description -->
         <section class="mt-12">
             <h3 class="text-xl font-semibold text-gray-700 mb-4">Deskripsi :</h3>

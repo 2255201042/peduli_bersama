@@ -1,8 +1,5 @@
 <x-app-layout>
     <div class="container mx-auto px-4 py-6">
-        <!-- Welcome Message -->
-        <h1 class="text-2xl font-bold text-gray-800">Welcome, Admin!</h1>
-        <p class="text-gray-600">Here's an overview of your platform's performance.</p>
 
         <!-- Stats Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
@@ -45,17 +42,34 @@
                         <td class="py-2 px-4">{{ $campaign->penggalang->name ?? 'N/A' }}</td>
                         <td class="py-2 px-4">Rp. {{ number_format($campaign->target_dana) }}</td>
                         <td class="py-2 px-4">
-                            {{ match($campaign->status) {
-                                1 => 'Done Galang',
-                                2 => 'Aktif',
-                                3 => 'Pending',
-                                4 => 'Sedang di Proses WD',
-                                5 => 'Selesai',
-                                6 => 'WD Gagal',
-                                7 => 'Gagal Galang',
-                                8 => 'Dibatalkan',
-                                default => $campaign->status,
-                            } }}
+                            @switch($campaign->status)
+                              @case(1)
+                                  Done Galang
+                                  @break
+                              @case(2)
+                                  Aktif
+                                  @break
+                              @case(3)
+                                  Pending
+                                  @break
+                              @case(4)
+                                  Sedang di Proses WD
+                                  @break
+                              @case(5)
+                                  Selesai
+                                  @break
+                              @case(6)
+                                  WD Gagal
+                                  @break
+                              @case(7)
+                                  Gagal Galang
+                                  @break
+                              @case(8)
+                                  Dibatalkan
+                                  @break
+                              @default
+                                  Unknown
+                          @endswitch
                         </td>
                         <td class="py-2 px-4">
                             <a href="{{ route('kampanye.show', $campaign->id) }}" class="text-blue-500 hover:underline">Lihat</a>                

@@ -126,11 +126,8 @@ Route::middleware('auth')->group(function () {
     Route::Get('detailkampanye/{id}', [DashboardAdminController::class, 'detailkampanye'])->name('admin.detailkampanye');
     Route::Get('admin/pengalang', [DashboardAdminController::class, 'pengalang'])->name('admin.pengalang');
     Route::Get('admin/pengguna', [DashboardAdminController::class, 'penguna'])->name('admin.pengguna');
-    Route::Get('admin/kelola', [DashboardAdminController::class, 'kelolaFull'])->name('admin.kelola');
-    Route::put('admin/valid/{id}', [DashboardAdminController::class, 'approveCampaign'])->name('admin.valid');
-
-
-
+    Route::get('admin/kelola', [DashboardAdminController::class, 'kelolaFull'])->name('admin.kelola');
+    Route::post('admin/valid/{id}', [DashboardAdminController::class, 'approveCampaign'])->name('admin.valid');
 });
 
 require __DIR__.'/auth.php';
