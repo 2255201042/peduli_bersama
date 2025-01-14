@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Validasi_Danas;
+use App\Models\Kampayes;
 
 class ValidasidanaController extends Controller
 {
@@ -49,6 +50,9 @@ class ValidasidanaController extends Controller
 
         // Create a new validation record
         Validasi_Danas::create($request->all());
+
+
+
 
         return redirect()->route('validasidana.index')
                          ->with('success', 'Validasi dana berhasil dibuat.');

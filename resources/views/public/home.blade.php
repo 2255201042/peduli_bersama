@@ -5,7 +5,7 @@
 @section('content')
 
 
-<section class="relative">
+<section class="relative -mt-20">
   <!-- Swiper -->
   <div class="swiper">
       <div class="swiper-wrapper">
@@ -14,7 +14,7 @@
                   <img 
                       src="{{ asset('images/campaigns/' . $image->gambar) }}" 
                       alt="Slide Image {{ $loop->iteration }}" 
-                      class="w-full h-96 object-cover"
+                      class="w-full h-96 object-fit"
                   />
               </div>
           @endforeach
@@ -34,7 +34,7 @@
       <img 
         src="{{ asset('images/campaigns/' . $campaign->gambar) }}" 
         alt="{{ $campaign->title }}" 
-        class="w-full h-48 object-cover"
+        class="w-full h-48 object-fit"
       />
 
       <!-- Hover Overlay -->

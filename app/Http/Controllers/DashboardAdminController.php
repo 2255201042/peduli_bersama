@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Kampayes;
+use App\Models\Reason;
 use App\Models\Validasi_Danas;
 use Illuminate\Support\Facades\DB;
 
@@ -93,31 +94,36 @@ class DashboardAdminController extends Controller
         ));
     }
 
-
     public function kelolaFull(Request $request)
     {
-        $search = $request->input('search');
-
-        $kampanyes = Kampayes::when($search, function ($query, $search) {
-            return $query->where('title', 'like', '%' . $search . '%');
-        })
-        ->where('status', '=', $request->status)
-        ->paginate(10);
-
+        $kampanyes = Kampayes::query()
+            ->when($request->search, function ($query, $search) {
+                return $query->where('title', 'like', '%' . $search . '%');
+            })
+            ->when($request->status, function ($query, $status) {
+                return $query->where('status', $status);
+            })
+            ->paginate(10);
+    
         return view('admin.admin.kelola', compact('kampanyes'));
     }
-
     
     public function approveCampaign(Request $request, $id)
     {
-        $campaign = Kampayes::findOrFail($id); // Safeguard against missing records
-        $campaign->status = $request->status; 
+        $campaign = Kampayes::findOrFail($id);
+        $campaign->status = $request->status;
+    
+        if (in_array($request->status, [6, 7, 8]) && $request->reason) {
+            Reason::create([
+                'kampanye_id' => $campaign->id,
+                'alesan' => $request->reason,
+            ]);
+        }
+    
         $campaign->save();
     
-        return redirect()->back()->with('success', 'Campaign updated successfully!');
+        return redirect()->route('admin.kelola')->with('success', 'Campaign updated successfully!');
     }
-
-
     
     public function dataPengguna(Request $request)
     {

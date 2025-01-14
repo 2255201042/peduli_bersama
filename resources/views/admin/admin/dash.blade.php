@@ -1,8 +1,5 @@
 <x-app-layout>
   <div class="container mx-auto px-4 py-6">
-      <!-- Welcome Message -->
-      <h1 class="text-2xl font-bold text-gray-800">Welcome, Admin!</h1>
-      <p class="text-gray-600">Here's an overview of your platform's performance.</p>
 
       <!-- Stats Cards -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">

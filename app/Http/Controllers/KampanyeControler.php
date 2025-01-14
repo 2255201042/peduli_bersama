@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\Kampayes;
 use App\Models\Validasi_Danas;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Reason;
 
 
 // done galang = 1
@@ -107,7 +109,7 @@ class KampanyeControler extends Controller
             'gambar' => $campaignImage,
             'f_ktp' => $ktpImage,
             'lampiran' => $lampiran,
-            'status' => 'pending', // Default status
+            'status' => 3, // Default status
             'start_date' => $request->input('start_date'),
             'end_date' => $request->input('end_date'),
         ]);
@@ -124,38 +126,50 @@ class KampanyeControler extends Controller
 
     public function createPencairanDana()
     {
-        $kampanyes = Kampayes::where('id_penggalang', Auth::id())->where('status', '1')->get();
-        $withdrawals = Kampayes::where('id_penggalang', Auth::id())->where('status', '4')->get();
+        $kampanyes = Kampayes::where('id_penggalang', Auth::id())
+            ->where('status', '1')
+            ->get();
+
+        $withdrawals = Kampayes::select('kampanye.id', 'kampanye.title', 'kampanye.status', 'reason.alesan', DB::raw('SUM(validasidana.payment_amount) as total_amount'))
+            ->where('kampanye.id_penggalang', Auth::id())
+            ->where(function ($query) {
+                $query->where('kampanye.status', 4)
+                    ->orWhere('kampanye.status', 5)
+                    ->orWhere('kampanye.status', 6);
+            })
+            ->leftJoin('validasidana', 'kampanye.id', '=', 'validasidana.kampanye_id')
+            ->leftJoin('reason', 'kampanye.id', '=', 'reason.kampanye_id')
+            ->groupBy('kampanye.id', 'kampanye.title', 'kampanye.status', 'reason.alesan')
+            ->get();
 
         return view('admin.kampanye.pencairan', compact('kampanyes', 'withdrawals'));
     }
 
     public function storePencairanDana(Request $request)
     {
-        $request->validate([
-            'kampanye_id' => 'required|exists:kampayes,id',
-            'pengajuan_dana' => 'required|file|mimes:pdf,doc,docx|max:2048',
-        ]);
-
-        // Find the campaign
-        $kampanye = Kampayes::findOrFail($request->kampanye_id);
-
-        // Check if the campaign is eligible for withdrawal
-        if ($kampanye->status !== 1) { // Status `1` means "done galang"
+        
+    
+        $kampanye = Kampayes::findOrFail($request->kampanye_id); // Corrected class name if needed
+    
+        if ($kampanye->status != 1) { 
             return redirect()->back()->with('error', 'Kampanye ini tidak memenuhi syarat untuk pencairan dana.');
         }
 
-        // Upload the proposal file
-        $proposal = time() . '_proposal.' . $request->file('pengajuan_dana')->extension();
-        $request->file('pengajuan_dana')->move(public_path('attachments'), $proposal);
+        
+        try {
+            $proposalFilename = time() . '_proposal.' . $request->file('pengajuan_dana')->getClientOriginalExtension();
+            $request->file('pengajuan_dana')->move(public_path('attachments'), $proposalFilename);
+    
+            
+            $kampanye->status = 4;
+            $kampanye->perposal = $proposalFilename;
 
-        // Update the campaign with the uploaded proposal and change status
-        $kampanye->update([
-            'perposal' => $proposal,
-            'status' => 4, // Status `4` means "sedang di proses wd"
-        ]);
-
-        return redirect()->route('pencairan.create')->with('success', 'Pencairan dana berhasil diajukan.');
+            $kampanye->save();
+    
+            return redirect()->route('pencairan.create')->with('success', 'Pencairan dana berhasil diajukan.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan saat mengajukan pencairan dana. Silakan coba lagi.');
+        }
     }
 
 

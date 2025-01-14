@@ -104,8 +104,15 @@ class PublicController extends Controller
     public function detail(string $id)
     {
         $Kdata = Kampayes::find($id);
+        // Calculate total collected funds
+        $totalCollected = Validasi_Danas::where('kampanye_id', $id)->sum('payment_amount');
+
+        // Pass start date and end date from the campaign
+        $startDate = $Kdata->start_date;
+        $endDate = $Kdata->end_date;
+
         $Transaksis = Validasi_Danas::where('kampanye_id', $id)->orderBy('created_at', 'desc')->get(); 
-        return view('public.detail', compact('Kdata', 'Transaksis'));
+        return view('public.detail', compact('Kdata', 'Transaksis', 'totalCollected', 'startDate', 'endDate'));
     }
 
     public function search(Request $request)
@@ -162,6 +169,8 @@ class PublicController extends Controller
     {
         $donasi = Validasi_Danas::findOrFail($donasiId);
 
+
+        
         // Update the payment_date
         $donasi->payment_date = now();
         $donasi->save();
@@ -203,6 +212,18 @@ class PublicController extends Controller
         $donasi->no_hp = $request->no_hp;
         $donasi->payment_amount = $request->payment_amount;
         $donasi->payment_date = null; 
+
+
+                // check dana yang sudah terkumpul
+        $dana_terkumpul = Validasi_Danas::where('kampanye_id', $request->kampanye_id)->sum('payment_amount');
+        $kampanye = Kampayes::find($request->kampanye_id);
+        if ($dana_terkumpul >= $kampanye->target_dana) {
+            $kampanye->status = 1;
+            $kampanye->save();
+        }
+
+
+
         $donasi->save();
 
         return redirect()->route('generate.qr', $donasi->id)
